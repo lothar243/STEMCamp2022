@@ -28,9 +28,7 @@ def gen_clue_list(first, last, space, secret):
 
 if __name__ == "__main__":
 
-    if (len(sys.argv) != 2):
-        sys.exit("Need a secret number")
-    secret_number = int(sys.argv[1])
+    secret_number = 42
 
     result = ""
     try:
