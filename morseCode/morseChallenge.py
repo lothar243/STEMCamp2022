@@ -67,17 +67,10 @@ def runRound(roundText, stringLength, score):
     return score
 
 def evalScore(roundNumber, currentScore):
-    code = random.randint(10000,99999)
+    code = str(random.randint(10000,99999))
     if LETTERS_PER_ROUND == currentScore:
         random.seed(roundNumber * 42)
-        print(str(b64decode(b'WW91IGdvdCBhIHBlcmZlY3Qgc2NvcmUgZm9yIHRoaXMgbGV2ZWwhIFlvdXIgZmxhZyBpcyBjeU1Uew==')) + code + "}")
-
-print("Round 1")
-evalScore(1,5)
-print("round 2")
-evalScore(2,10)
-print("round 3")
-evalScore(3,15)
+        print(str(b64decode(b'WW91IGdvdCBhIHBlcmZlY3Qgc2NvcmUgZm9yIHRoaXMgbGV2ZWwhIFlvdXIgZmxhZyBpcyBjeU1Uew=='))[2:-1] + code + "}")
 
 
 score = 0
