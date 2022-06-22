@@ -3,7 +3,7 @@ from time import sleep
 from string import ascii_uppercase
 import sys
 import random
-from base64 import decode
+from base64 import b64decode
 
 led = LED(22)
 DIT_LENGTH = .5
@@ -70,7 +70,7 @@ def evalScore(roundNumber, currentScore):
     code = random.randint(10000,99999)
     if LETTERS_PER_ROUND == currentScore:
         random.seed(roundNumber * 42)
-        print(str(decode(b'WW91IGdvdCBhIHBlcmZlY3Qgc2NvcmUgZm9yIHRoaXMgbGV2ZWwhIFlvdXIgZmxhZyBpcyBjeU1Uew==')) + code + "}")
+        print(str(b64decode(b'WW91IGdvdCBhIHBlcmZlY3Qgc2NvcmUgZm9yIHRoaXMgbGV2ZWwhIFlvdXIgZmxhZyBpcyBjeU1Uew==')) + code + "}")
 
 print("Round 1")
 evalScore(1,5)
