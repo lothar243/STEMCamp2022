@@ -52,9 +52,9 @@ def runRound(roundText, num_passwords, password_length, password_characters, sco
     return score
 
 def evalScore(roundNumber, currentScore):
-    code = str(random.randint(10000,99999))
     if PASSWORDS_PER_ROUND == currentScore:
         random.seed(roundNumber * inthash)
+        code = str(random.randint(10000,99999))
         print(str(b64decode(b'WW91IGdvdCBhIHBlcmZlY3Qgc2NvcmUgZm9yIHRoaXMgbGV2ZWwhIFlvdXIgZmxhZyBpcyBjeU1Uew=='))[2:-1] + code + "}")
 
 
