@@ -18,7 +18,7 @@ with open(sys.argv[0], 'r') as thisfile:
     inthash = int(myhash, 16)
 
 
-with open("wordlist_en_eff.txt", 'r') as dicewareFile:
+with open("diceware.txt", 'r') as dicewareFile:
     # wordlist = [line.split(" ")[1] for line in dicewareFile.readlines()]
     wordlist = []
     lines = dicewareFile.readlines()
@@ -27,22 +27,19 @@ with open("wordlist_en_eff.txt", 'r') as dicewareFile:
         word = words[1]
         wordlist.append(word.capitalize())
 
-def displayString(mystring, time):
-    print(mystring)
-    sleep(time)
-    system('clear')
-
 
 def runRound(roundText, num_passwords, password_length, password_characters, score):
     print(roundText)
     for _ in range(PASSWORDS_PER_ROUND):
-        print("Get ready for the next password, you have " + str(TIME_TO_MEMORIZE) + " seconds to memorize it")
-        sleep(2)
+        print("Here's your password. Press enter when you've memorized it")
         mystring = "".join([random.choice(password_characters) for _ in range(password_length)])
-        displayString(mystring, TIME_TO_MEMORIZE)
+        print(mystring)
+        input()
+        system('clear')
         print("Ok, now you have to wait " + str(TIME_AFTER_MEMORIZE) + " more seconds before entering it.")
         sleep(TIME_AFTER_MEMORIZE)
         tcflush(sys.stdin, TCIOFLUSH)
+        system('clear')
         guess = input("What is the password? ")
         if guess == mystring:
             score += 1
@@ -65,12 +62,12 @@ if startingLevel == 1:
     score = runRound(roundText, 3, 3, wordlist, score)
     evalScore(1, score)
     prevScore = score
-if startingLevel == 2:
+elif startingLevel == 2:
     roundText = "Round 2, 4 words, search space = 7776^4 = 3656158440062976 = 3e15"
     password_characters = string.ascii_uppercase + string.ascii_lowercase + string.digits
     score = runRound(roundText, 3, 4, wordlist, score)
     evalScore(2, score)
-if startingLevel <= 3:
+elif startingLevel == 3:
     roundText = "Round 3, 5 words, search space = 7776^5 = 28430288029929701376 = 2e19"
     password_characters = string.ascii_uppercase + string.ascii_lowercase + string.digits + string.punctuation
     score = runRound(roundText, 3, 5, wordlist, score)

@@ -17,15 +17,6 @@ with open(sys.argv[0], 'r') as thisfile:
     inthash = int(myhash, 16)
 
 
-with open("wordlist_en_eff.txt", 'r') as dicewareFile:
-    # wordlist = [line.split(" ")[1] for line in dicewareFile.readlines()]
-    wordlist = []
-    lines = dicewareFile.readlines()
-    for line in lines:
-        words = line.split()
-        word = words[1]
-        wordlist.append(word.capitalize())
-
 def displayString(mystring, time):
     print(mystring)
     sleep(time)
@@ -35,13 +26,15 @@ def displayString(mystring, time):
 def runRound(roundText, num_passwords, password_length, password_characters, score):
     print(roundText)
     for _ in range(PASSWORDS_PER_ROUND):
-        print("Get ready for the next password, you have " + str(TIME_TO_MEMORIZE) + " seconds to memorize it")
-        sleep(2)
+        print("Here's the next password, press enter when you're done memorizing it")
         mystring = "".join([random.choice(password_characters) for _ in range(password_length)])
-        displayString(mystring, TIME_TO_MEMORIZE)
+        print(mystring)
+        input()
+        system('clear')
         print("Ok, now you have to wait " + str(TIME_AFTER_MEMORIZE) + " more seconds before entering it.")
         sleep(TIME_AFTER_MEMORIZE)
         tcflush(sys.stdin, TCIOFLUSH)
+        system('clear')
         guess = input("What is the password? ")
         if guess == mystring:
             score += 1
@@ -66,12 +59,12 @@ if startingLevel == 1:
     evalScore(1, score)
 elif startingLevel == 2:
     roundText = "Round 2, 8 characters, lower and upper case with digits, search space: 62^8 = 218,340,105,584,896 = 2e14"
-    password_characters = string.string.ascii_uppercase + string.ascii_lowercase + string.digits
+    password_characters = string.ascii_uppercase + string.ascii_lowercase + string.digits
     score = runRound(roundText, 3, 8, password_characters, score)
     evalScore(2, score)
 elif startingLevel == 3:
     roundText = "Round 3, 10 characters, lower and upper case with digits and special characters, search space 94^10 = 53,861,511,409,489,970,176 = 5e19"
-    password_characters = string.string.ascii_uppercase + string.ascii_lowercase + string.digits + string.punctuation
+    password_characters = string.ascii_uppercase + string.ascii_lowercase + string.digits + string.punctuation
     score = runRound(roundText, 3, 10, password_characters, score)
     evalScore(3, score)
 
