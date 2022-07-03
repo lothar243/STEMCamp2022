@@ -8,7 +8,7 @@ import time
 RED = 21
 YELLOW = 20
 GREEN = 16
-
+USE_LCD = True
 
 def logAccess(id, status):
     with open ("log.txt", 'a') as logfile:
@@ -36,28 +36,38 @@ GPIO.output(GREEN, 0)
 
 reader = SimpleMFRC522()
 try:
-    lcd_i2c.lcd_init()
+    if USE_LCD:
+        lcd_i2c.lcd_init()
     while True:
         GPIO.output(RED, 0)
         GPIO.output(GREEN, 0)
         GPIO.output(YELLOW, 1)
-        lcd_i2c.lcd_string(" Please present", lcd_i2c.LCD_LINE_1)
-        lcd_i2c.lcd_string('    RFID card', lcd_i2c.LCD_LINE_2)
+        if USE_LCD:
+            lcd_i2c.lcd_string(" Please present", lcd_i2c.LCD_LINE_1)
+            lcd_i2c.lcd_string('    RFID card', lcd_i2c.LCD_LINE_2)
+        else:
+            print("Please present your RFID card")
         id, text = reader.read()
         print("card swiped, id=", type(id) ,id)
         if id in validcards:
             GPIO.output(YELLOW, 0)
             GPIO.output(GREEN, 1)
             logAccess(id, "Access Granted")
-            lcd_i2c.lcd_string("Access Granted", lcd_i2c.LCD_LINE_1)
-            lcd_i2c.lcd_string(str(id), lcd_i2c.LCD_LINE_2)
+            if USE_LCD:
+                lcd_i2c.lcd_string("Access Granted", lcd_i2c.LCD_LINE_1)
+                lcd_i2c.lcd_string(str(id), lcd_i2c.LCD_LINE_2)
+            else:
+                print("Access Granted")
             time.sleep(5)
         else:
             GPIO.output(YELLOW, 0)
             GPIO.output(RED, 1)
             logAccess(id, "Access Denied")
-            lcd_i2c.lcd_string("Access Denied", lcd_i2c.LCD_LINE_1)
-            lcd_i2c.lcd_string(str(id), lcd_i2c.LCD_LINE_2)
+            if(USE_LCD):
+                lcd_i2c.lcd_string("Access Denied", lcd_i2c.LCD_LINE_1)
+                lcd_i2c.lcd_string(str(id), lcd_i2c.LCD_LINE_2)
+            else:
+                print("Access Denied")
             time.sleep(5)
 
 
