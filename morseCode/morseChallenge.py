@@ -6,7 +6,7 @@ import random
 from base64 import b64decode
 
 led = LED(22)
-DIT_LENGTH = .5
+DIT_LENGTH = .4
 DAH_LENGTH = 1
 BETWEEN_LETTER = .1
 PAUSE_LENGTH = 1
@@ -50,7 +50,8 @@ def sample():
     for letter in "hello":
         play_letter(letter)
 
-def runRound(roundText, stringLength, score):
+def runRound(roundText, stringLength):
+    score = 0
     print(roundText)
     for _ in range(LETTERS_PER_ROUND):
         print("Get ready for the next sequence")
@@ -72,21 +73,16 @@ def evalScore(roundNumber, currentScore):
         random.seed(roundNumber * 42)
         print(str(b64decode(b'WW91IGdvdCBhIHBlcmZlY3Qgc2NvcmUgZm9yIHRoaXMgbGV2ZWwhIFlvdXIgZmxhZyBpcyBjeU1Uew=='))[2:-1] + code + "}")
 
-
+roundNum = input("Which round would you like to run? (1-3) ")
 score = 0
-score = runRound("Round 1, single letters", 1, score)
-evalScore(1, score)
-choice = input("Would you like to advance to round 2 (y/n)?  ")
-if choice != 'y':
-    print("Quitting")
-    sys.exit()
-prevScore = score
-score = runRound("Round 2, two letters", 2, score)
-evalScore(1, score - prevScore)
-choice = input("Would you like to advance to round 3 (y/n)?  ")
-if choice != 'y':
-    print("Quitting")
-    sys.exit()
-score = runRound("Round 3, three letters", 3, score)
-evalScore(1, score - prevScore)
-print("Your final score was " + str(score) + " points")
+if(roundNum == 1):
+    score = runRound("Round 1, single letters", 1)
+    evalScore(1, score)
+elif(roundNum == 2):
+    score = runRound("Round 2, two letters", 2)
+    evalScore(2, score)
+elif(roundNum == 3):
+    score = runRound("Round 3, three letters", 3)
+    evalScore(3, score)
+# elif(roundNum == 4):
+#    score = runRound("Round 4, four letters", 4)
