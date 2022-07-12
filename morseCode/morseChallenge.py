@@ -75,13 +75,13 @@ def evalScore(roundNumber, currentScore):
 
 roundNum = input("Which round would you like to run? (1-3) ")
 score = 0
-if(roundNum == 1):
+if(roundNum == '1'):
     score = runRound("Round 1, single letters", 1)
     evalScore(1, score)
-elif(roundNum == 2):
+elif(roundNum == '2'):
     score = runRound("Round 2, two letters", 2)
     evalScore(2, score)
-elif(roundNum == 3):
+elif(roundNum == '3'):
     score = runRound("Round 3, three letters", 3)
     evalScore(3, score)
 # elif(roundNum == 4):
