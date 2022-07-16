@@ -3,22 +3,24 @@ from time import sleep
 from threading import Thread
 from pprint import pprint
 
-pins = {1: 6,
-        2: 5,
-        5: 0,
-        7: 11,
-        8: 9,
-        9: 13,
-        12: 19,
-        14: 26,
-        16: 21,
-        15: 20,
-        13: 16,
-        11: 12,
-        10: 7,
-        3: 8,
-        4: 25,
-        6: 24
+# matching the pin number on the LED matrix to the GPIO pin on the pi
+# Example: Matrix Pin 1 (For R5) is controlled by GPIO6
+pins = {1: 6,   # R5
+        2: 5,   # R7
+        5: 0,   # R8
+        7: 11,  # R6
+        8: 9,   # R3
+        9: 13,  # R1
+        12: 19, # R4
+        14: 26, # R2
+        16: 21, # C8
+        15: 20, # C7
+        13: 16, # C1
+        11: 12, # C6
+        10: 7,  # C4
+        3: 8,   # C2
+        4: 25,  # C3
+        6: 24   # C5
         }
 leds = {}
 for pin, gpio in pins.items():
