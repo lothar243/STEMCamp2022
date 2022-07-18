@@ -68,9 +68,9 @@ def runRound(roundText, stringLength):
     return score
 
 def evalScore(roundNumber, currentScore):
-    code = str(random.randint(10000,99999))
     if LETTERS_PER_ROUND == currentScore:
         random.seed(roundNumber * 42)
+        code = str(random.randint(10000,99999))
         print(str(b64decode(b'WW91IGdvdCBhIHBlcmZlY3Qgc2NvcmUgZm9yIHRoaXMgbGV2ZWwhIFlvdXIgZmxhZyBpcyBjeU1Uew=='))[2:-1] + code + "}")
 
 roundNum = input("Which round would you like to run? (1-3) ")
