@@ -19,4 +19,4 @@ sudo snap install john-the-ripper
 sudo pip3 install mfrc522
 
 # Disabling WIFI
-sudo ifconfig wlan0 down
+# sudo ifconfig wlan0 down
