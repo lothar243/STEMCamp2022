@@ -43,7 +43,7 @@ is mapped to the hard drive.
 #### Find Clue 4 ####
 
 Your hint for clue 4 is the file `/etc/hostname`. This file contains a single
-word, which is the name of your computer. This name is your hint. Remember we
-can find the next hint by typing
+word, which is the name of your computer. When you find the answer, return to
+/home/user/scavenger-hunt and type:
 
-    python next_clue.py [secret number] [next clue number] [hint]
+    python3 answer.py
